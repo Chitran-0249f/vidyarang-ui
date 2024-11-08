@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+from PIL import Image
 
 # Set the page configuration
 st.set_page_config(page_title="VidyaRANG : Learning Made Easy", page_icon=":rocket:", layout="wide")
@@ -69,16 +70,9 @@ with title_container:
      
 # Page content based on selected page
 if st.session_state.page == "home":
-
-    
-    # Center align the title and subtitle container
     st.write("")
     st.write("")
     st.write("")
-    st.write("")
-    st.write("")
-    st.write("")
-    
     st.write("")
     search_container = st.container()
     
@@ -144,29 +138,53 @@ elif st.session_state.page == "about":
     
     # Introduction Section
     st.header("About the Product")
+    image_path = "/home/chetan/course_chat/VidyaRANG Data/White Minimalist Profile LinkedIn Banner.png" 
+    st.image(image_path, caption="AI Powered Learning Platform", use_column_width=True)
+
     st.write("""
     Welcome to VidyaRANG, your smart companion for learning! VidyaRANG is an AI-powered educational platform designed to make studying simpler, more interactive, and engaging. With VidyaRANG, you can easily upload your study materials, chat directly with your documents to get instant answers, take quizzes to test your knowledge, and analyze your progress with in-depth feedback. 
     """)
              
     st.write("""Whether you're a student or a lifelong learner, VidyaRANG makes learning easier and more effective. Dive into a personalized learning experience and see how VidyaRANG can help you reach your educational goals with confidence!
     """)
-
-    # Product Features
-    st.header("Key Features of VidyaRANG")
-    st.markdown("""
-    - **Privacy-First Document Sharing:** Your uploaded documents are secure and private to you, and you have the control to share them only with assigned users. 
-    - **Interactive Chat with YouTube Educational Videos:** Expand your learning with our video chat feature.
-    - **Diverse Quizzes: Factual, Memory, and Reasoning:** Take a variety of quizzes designed to test different types of knowledge.
-    - **Comprehensive Evaluation and Analytics:** Understand your progress better with in-depth evaluations and analytics.
-    """)
-
+    image_path_1 = "/home/chetan/course_chat/VidyaRANG Data/Key Features of VidyaRANG.jpg"
+    st.image(image_path_1 , use_column_width=True)
+   
     # Demo Section
     st.header("VidyaRANG Demo")
     st.write("Discover VidyaRANG in action – watch our demo to see how you can transform your learning journey with AI-powered insights, interactive quizzes, and personalized document interactions!")
 
-    # Embed YouTube videos
-    st.video("https://youtu.be/9ttvfEUE5RI?si=fG95m4SRGF98M9Fl")  # Replace with actual video link
-    st.video("https://youtu.be/bai3ngmbheo?si=u4H0GON1S-SmMKAV")  # Replace with actual video link
+ 
+    # Create two columns for left and right positioning
+    col1, col2 = st.columns(2)
+
+    # Embed first YouTube video in the left column
+    with col1:
+        st.markdown("""
+            <style>
+                .video-container iframe {
+                    width: 100%;  /* Adjust width as needed */
+                    height: 315px; /* Adjust height as needed */
+                }
+            </style>
+            """, unsafe_allow_html=True)
+        st.markdown('<div class="video-container">', unsafe_allow_html=True)
+        st.video("https://youtu.be/9ttvfEUE5RI?si=fG95m4SRGF98M9Fl")  # Replace with actual video link
+        st.markdown('</div>', unsafe_allow_html=True)
+
+    # Embed second YouTube video in the right column
+    with col2:
+        st.markdown("""
+            <style>
+                .video-container iframe {
+                    width: 100%;  /* Adjust width as needed */
+                    height: 315px; /* Adjust height as needed */
+                }
+            </style>
+            """, unsafe_allow_html=True)
+        st.markdown('<div class="video-container">', unsafe_allow_html=True)
+        st.video("https://youtu.be/bai3ngmbheo?si=u4H0GON1S-SmMKAV")  # Replace with actual video link
+        st.markdown('</div>', unsafe_allow_html=True)
 
     # Team Members Section
     st.header("Meet the Team")
@@ -191,11 +209,11 @@ elif st.session_state.page == "about":
     st.header("Get in Touch")
     st.write("""
     For more information about our product, please contact us at:
-    - **Email:** [contact@ourproduct.com](mailto:contact@ourproduct.com)
-    - **Support:** [support@ourproduct.com](mailto:support@ourproduct.com)
+    - **Email:** [vidyarang.ai@gmail.com](mailto:vidyarang.ai@gmail.com)
+    - **Team:** [AIGuruKul.dev](mailto:support@ourproduct.com)
     """)
 
-    st.write("Stay connected with us on our journey to make AI accessible to everyone!")
+    st.write("Stay connected with us on our journey to make Education accessible to everyone!")
 
 elif st.session_state.page == "create_course":
     st.header("Create New Course")
