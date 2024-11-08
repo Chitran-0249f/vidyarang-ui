@@ -12,7 +12,7 @@ if "page" not in st.session_state:
 def switch_page(page_name):
     st.session_state.page = page_name
 
-st.title("VidyaRANG : Learning Made Easy")
+
 
 # Sidebar with navigation buttons
 with st.sidebar:
@@ -58,32 +58,70 @@ elif "View Analytics - Science" in st.session_state.page:
 elif "View Analytics - Maths" in st.session_state.page:
     st.session_state.page = "analytics3"
 
+title_container = st.container()
+with title_container:
+    st.markdown("""
+        <div style="text-align: center;">
+            <h1>VidyaRANG : Learning Made Easy</h1>
+            <p>Upload, Learn, Interact, Assess, and Improve – Your Complete Learning Journey.</p>
+        </div>
+        """, unsafe_allow_html=True)
+     
 # Page content based on selected page
 if st.session_state.page == "home":
 
     
     # Center align the title and subtitle container
-    title_container = st.container()
-    with title_container:
-        st.markdown("""
-            <div style="text-align: center;">
-                <h1>Next Level AI Tutoring</h1>
-                <p>Create a custom learning pathway to help you achieve more in school, work, and life.</p>
-            </div>
-            """, unsafe_allow_html=True)
-
-    # Center align the search bar and generate course button container
+    st.write("")
+    st.write("")
+    st.write("")
+    st.write("")
+    st.write("")
+    st.write("")
+    
+    st.write("")
     search_container = st.container()
-    with search_container:
-        st.markdown('<div style="text-align: center;">', unsafe_allow_html=True)
-        search_term = st.text_input("Select Course to take quiz", key="search_input", label_visibility="collapsed")
-        if st.button("Evaluate Yourself"):
-            st.write(f"Generating Quiz for: {search_term}")
-            # Add your course generation logic here
-        st.markdown('</div>', unsafe_allow_html=True)
+    
+    # Custom CSS to style the dropdown
+    st.markdown("""
+        <style>
+        /* Change background color of dropdown */
+        .stSelectbox div[data-baseweb="select"] > div {
+            background-color: white; /* Set background color to white */
+            color: black;            /* Text color */
+            font-weight: normal;     /* Optional: Set text to normal weight */
+        }
 
-    # Center align the popular topics section
+        /* Style the dropdown options */
+        .stSelectbox div[data-baseweb="select"] ul {
+            background-color: white;
+            color: black;
+        }
+        </style>
+        """, unsafe_allow_html=True)
+
+    # Layout container for search and button
+    with st.container():
+        col1, col2, col3 = st.columns([1, 2, 1])  # Adding empty columns on sides to center-align
+
+        with col2:
+            # Center-align dropdown and button by placing them within the same column
+            st.markdown('<div style="text-align: center;">', unsafe_allow_html=True)
+            
+            # Dropdown to select course (centered in the middle column)
+            selected_course = st.selectbox("Select Course to take quiz", ["Select a course", "History", "Science", "Maths"])
+            col1, col2, col3 = st.columns([1, 1, 1]) 
+            # Button directly below the selectbox
+            with col2:
+            # Center-align dropdown and button by placing them within the same column
+                if st.button("Begin Assessment"):
+                    st.write(f"Generating Quiz for: {selected_course}")
+                
+            st.markdown('</div>', unsafe_allow_html=True)
+
+    # Center align the popular topics section (if you want to add it below)
     topics_container = st.container()
+
     with topics_container:
         st.markdown("""
             <div style="text-align: center;">
@@ -102,8 +140,62 @@ if st.session_state.page == "home":
         """, unsafe_allow_html=True)
 
 elif st.session_state.page == "about":
-    st.header("About Page")
-    st.write("This is the About page of the app.")
+
+    
+    # Introduction Section
+    st.header("About the Product")
+    st.write("""
+    Welcome to VidyaRANG, your smart companion for learning! VidyaRANG is an AI-powered educational platform designed to make studying simpler, more interactive, and engaging. With VidyaRANG, you can easily upload your study materials, chat directly with your documents to get instant answers, take quizzes to test your knowledge, and analyze your progress with in-depth feedback. 
+    """)
+             
+    st.write("""Whether you're a student or a lifelong learner, VidyaRANG makes learning easier and more effective. Dive into a personalized learning experience and see how VidyaRANG can help you reach your educational goals with confidence!
+    """)
+
+    # Product Features
+    st.header("Key Features of VidyaRANG")
+    st.markdown("""
+    - **Privacy-First Document Sharing:** Your uploaded documents are secure and private to you, and you have the control to share them only with assigned users. 
+    - **Interactive Chat with YouTube Educational Videos:** Expand your learning with our video chat feature.
+    - **Diverse Quizzes: Factual, Memory, and Reasoning:** Take a variety of quizzes designed to test different types of knowledge.
+    - **Comprehensive Evaluation and Analytics:** Understand your progress better with in-depth evaluations and analytics.
+    """)
+
+    # Demo Section
+    st.header("VidyaRANG Demo")
+    st.write("Discover VidyaRANG in action – watch our demo to see how you can transform your learning journey with AI-powered insights, interactive quizzes, and personalized document interactions!")
+
+    # Embed YouTube videos
+    st.video("https://youtu.be/9ttvfEUE5RI?si=fG95m4SRGF98M9Fl")  # Replace with actual video link
+    st.video("https://youtu.be/bai3ngmbheo?si=u4H0GON1S-SmMKAV")  # Replace with actual video link
+
+    # Team Members Section
+    st.header("Meet the Team")
+
+    # Display team members' details with images
+    team_members = [
+        {"name": "Alice Johnson", "role": "CEO", "bio": "Alice is a visionary leader with a passion for AI.", "image": "https://via.placeholder.com/150"},
+        {"name": "Bob Smith", "role": "CTO", "bio": "Bob is the mastermind behind the technology.", "image": "https://via.placeholder.com/150"},
+        {"name": "Claire Davis", "role": "Lead Data Scientist", "bio": "Claire brings expertise in machine learning.", "image": "https://via.placeholder.com/150"},
+        {"name": "David Brown", "role": "Product Manager", "bio": "David ensures that the product meets customer needs.", "image": "https://via.placeholder.com/150"}
+    ]
+
+    cols = st.columns(len(team_members))
+    for i, member in enumerate(team_members):
+        with cols[i]:
+            st.image(member["image"], width=150)
+            st.subheader(member["name"])
+            st.write(f"*{member['role']}*")
+            st.write(member["bio"])
+
+    # Contact Section
+    st.header("Get in Touch")
+    st.write("""
+    For more information about our product, please contact us at:
+    - **Email:** [contact@ourproduct.com](mailto:contact@ourproduct.com)
+    - **Support:** [support@ourproduct.com](mailto:support@ourproduct.com)
+    """)
+
+    st.write("Stay connected with us on our journey to make AI accessible to everyone!")
 
 elif st.session_state.page == "create_course":
     st.header("Create New Course")
